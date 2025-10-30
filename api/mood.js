@@ -5,14 +5,14 @@ export default async function handler(req, res) {
         return res.status(400).send("Missing ?username parameter");
     }
 
-    // --- Step 1: Fetch GitHub activity ---
+    // --- Fetch GitHub activity ---
     const resp = await fetch(`https://api.github.com/users/${username}/events`);
     if (!resp.ok) {
         return res.status(resp.status).send(`GitHub API error: ${resp.statusText}`);
     }
     const events = await resp.json();
 
-    // --- Step 2: Compute metrics ---
+    // --- Compute metrics ---
     let commitCount = 0;
     let issueCount = 0;
     let prCount = 0;
@@ -61,7 +61,7 @@ export default async function handler(req, res) {
         ? Math.floor((now - new Date(lastCommitDate)) / (1000 * 60 * 60 * 24))
         : 99;
 
-    // --- Step 3: Mood detection logic ---
+    // --- Mood detection logic ---
     let mood = { emoji: "🤖", label: "Neutral Dev", color: "777777" };
 
     if (commitCount > 40 && inactiveDays < 1)
@@ -115,7 +115,7 @@ export default async function handler(req, res) {
     else if (commentEvents > 5 && prCount > 2)
         mood = { emoji: "💬", label: "Discussion Driven", color: "58D68D" };
 
-    // --- Step 4: Render SVG ---
+    // --- Render SVG ---
     const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" width="220" height="30" role="img" aria-label="${mood.label}">
       <rect width="220" height="30" fill="#${mood.color}" rx="5"/>
@@ -126,7 +126,7 @@ export default async function handler(req, res) {
     </svg>
   `;
 
-    // --- Step 5: Cache & Send ---
+    // --- Cache & Send ---
     res.setHeader("Content-Type", "image/svg+xml");
     res.setHeader("Cache-Control", "s-maxage=3600");
     res.status(200).send(svg);

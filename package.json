@@ -1,5 +1,16 @@
 {
-  "name": "moodboard-badge",
-  "version": "1.0.0",
-  "type": "module"
+    "name": "moodboard-badge",
+    "version": "1.0.0",
+    "description": "A dynamic GitHub profile mood badge that changes based on your coding activity.",
+    "main": "index.js",
+    "scripts": {
+        "dev": "vercel dev",
+        "start": "node api/mood.js",
+        "build": "echo 'Nothing to build — Vercel handles it!'"
+    },
+    "dependencies": {
+        "node-fetch": "^3.3.2"
+    },
+    "type": "module",
+    "license": "MIT"
 }

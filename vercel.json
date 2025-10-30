@@ -1,5 +1,14 @@
 {
-  "routes": [
-    { "src": "/mood", "dest": "/api/mood.js" }
-  ]
+    "version": 2,
+    "functions": {
+        "api/mood.js": {
+            "runtime": "nodejs18.x"
+        }
+    },
+    "routes": [
+        {
+            "src": "/api/mood",
+            "dest": "/api/mood.js"
+        }
+    ]
 }

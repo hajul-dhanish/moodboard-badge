@@ -1,10 +1,5 @@
 {
     "version": 2,
-    "functions": {
-        "api/mood.js": {
-            "runtime": "vercel-edge@2"
-        }
-    },
     "routes": [
         {
             "src": "/api/mood",
